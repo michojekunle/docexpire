@@ -1,0 +1,21 @@
+{
+  "name": "docexpire",
+  "version": "1.0.0",
+  "description": "keep track of document expiration desktop app",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "keywords": [
+    "docexpire"
+  ],
+  "author": "AMD",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^30.0.0"
+  },
+  "dependencies": {
+    "flatpickr": "^4.6.13"
+  }
+}
