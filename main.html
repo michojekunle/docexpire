@@ -1,13 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
- <meta charset="UTF-8">
- <meta name="viewport"
- content="width=device-width, initial-scale=1.0">
- <meta http-equiv="X-UA-Compatible" content="ie=edge">
- <title>DocExpire</title>
-</head>
-<body>
- <h1>DocExpire</h1>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>DocExpire</title>
+    <link
+      rel="stylesheet"
+      href="./node_modules/material-design-lite/material.min.css"
+    />
+    <script src="./node_modules/material-design-lite/material.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link rel="stylesheet" href="./fonts/icon.css" />
+    <link rel="stylesheet" href="./fonts/styles.css" />
+  </head>
+  <body>
+    <div
+      class="demo-layout mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100"
+    >
+      <header
+        class="demo-header mdl-layout__header mdl-layout__header--scroll 65 mdl-color--grey-100 mdl-color-text--grey-800"
+      >
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title">Documents to Expire</span>
+          <div class="mdl-layout-spacer"></div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+            <label
+              class="mdl-button mdl-js-button mdl-button--icon"
+              for="search"
+            >
+              <i class="material-icons">search</i>
+            </label>
+            <div class="mdl-textfield__expandable-holder">
+              <input class="mdl-textfield__input" type="text" id="search" />
+              <label class="mdl-textfield__label" for="search">
+                Enter your query...
+              </label>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div class="demo-ribbon"></div>
+      <main class="demo-main mdl-layout__content">
+        <div class="demo-container mdl-grid"></div>
+      </main>
+      <ul></ul>
+    </div>
+    <script>
+      const electron = require("electron");
+      const { ipcRenderer } = electron;
+
+      const ul = document.querySelector("ul");
+
+      ipcRenderer.on("doc:add", (e, item) => {
+        const doc = document.createElement("li");
+        const docText = document.createTextNode(item);
+        doc.appendChild(docText);
+        ul.appendChild(doc);
+      });
+
+      ipcRenderer.on("doc:clear", () => {
+        ul.innerHTML = "";
+      });
+    </script>
+  </body>
 </html>
